@@ -4,21 +4,71 @@
     <meta charset="UTF-8">
     <title>ASCII Art Web</title>
     <style>
-        #text {
-            width: 100%;
-            height: 50px;
-            font-size: 20px;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
         }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        #text {
+            width: 75%;
+            height: 60px;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
         pre {
             font-size: 16px;
         }
+        
         .banner-box {
             border: 1px solid #ccc;
             padding: 10px;
             width: fit-content;
+            margin-bottom: 20px;
         }
+        
         .banner-box label {
             margin-right: 10px;
+        }
+        
+        .result-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 80%;
+            height: 80%;
+            overflow: auto;
+            white-space: pre-wrap;
         }
     </style>
     <script>
@@ -49,21 +99,30 @@
     </script>
 </head>
 <body>
-    <h1>ASCII Art Generator</h1>
-    <form>
-        <label for="text">Text:</label>
-        <textarea id="text" name="text" required></textarea><br><br>
-        <div class="banner-box">
-            <label for="banner">Banner:</label>
-            <input type="radio" id="standard" name="banner" value="standard" checked>
-            <label for="standard">Standard</label>
-            <input type="radio" id="shadow" name="banner" value="shadow">
-            <label for="shadow">Shadow</label>
-            <input type="radio" id="thinkertoy" name="banner" value="thinkertoy">
-            <label for="thinkertoy">Thinkertoy</label>
-        </div><br><br>
-    </form>
-    <h2>Result:</h2>
-    <pre id="ascii-art-result"></pre>
+    <div class="container">
+        <div class="navbar">
+            <h1>ASCII Art Generator</h1>
+            <!-- <nav>
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav> -->
+        </div>
+        <div class="content">
+            <textarea id="text" name="text" required placeholder="Enter your text here..."></textarea>
+            <div class="banner-box">
+                <label for="banner">Banner:</label>
+                <input type="radio" id="standard" name="banner" value="standard" checked>
+                <label for="standard">Standard</label>
+                <input type="radio" id="shadow" name="banner" value="shadow">
+                <label for="shadow">Shadow</label>
+                <input type="radio" id="thinkertoy" name="banner" value="thinkertoy">
+                <label for="thinkertoy">Thinkertoy</label>
+            </div>
+            <div class="result-box">
+                <pre id="ascii-art-result"></pre>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
