@@ -12,11 +12,10 @@ import (
 var templates = template.Must(template.ParseFiles(filepath.Join("templates", "index.html")))
 
 func main() {
-	// fmt.Println("Starting server on :8080...")
+	fmt.Println("Starting server on :8080...")
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/ascii", asciiArtHandler)
 	http.HandleFunc("/ascii-art-live", asciiArtLiveHandler)
-	fmt.Println("Starting server on :8080")
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -29,6 +28,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	err := templates.ExecuteTemplate(w, "index.html", nil)
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
 }
 
@@ -61,6 +61,7 @@ func asciiArtHandler(w http.ResponseWriter, r *http.Request) {
 	err = templates.ExecuteTemplate(w, "index.html", data)
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
 }
 
