@@ -2,63 +2,23 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
-	"path/filepath"
-
-	web "web/ascii" // Ensure this matches your module path
 )
 
-var templates = template.Must(template.ParseFiles(filepath.Join("templates", "index.html")))
-
 func main() {
-	http.HandleFunc("/", indexHandler)
-	http.HandleFunc("/ascii", asciiArtHandler)
-	fmt.Println("Starting server on :8080...")
-	log.Fatal(http.ListenAndServe(":8080", nil))
-}
-
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
-		return
+	// Define a handler function for handling HTTP requests
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello, World!") // Response to client
 	}
 
-	err := templates.ExecuteTemplate(w, "index.html", nil)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-	}
-}
+	// Register the handler function for the root route ("/")
+	http.HandleFunc("/", handler)
 
-func asciiArtHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
-		return
-	}
+	// Specify the port to listen on
+	port := ":8080" // Note the colon ":" before the port number
 
-	str := r.FormValue("text")
-	bannerStyle := r.FormValue("banner")
-
-	if str == "" || bannerStyle == "" {
-		http.Error(w, "Bad Request", http.StatusBadRequest)
-		return
-	}
-
-	art, err := web.PrintAscii(str, bannerStyle)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-
-	data := struct {
-		Art string
-	}{
-		Art: art,
-	}
-
-	err = templates.ExecuteTemplate(w, "index.html", data)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-	}
+	// Start the HTTP server
+	fmt.Printf("Server is listening on port %s...\n", port)
+	log.Fatal(http.ListenAndServe(port, nil))
 }
