@@ -1,20 +1,21 @@
 package web
 
 import (
+	"path/filepath"
 	"testing"
 )
 
 func TestLoadBanner(t *testing.T) {
 	// Test loading a valid banner file
-	loadBanner("shadow.txt")
+	loadBanner(filepath.Join("banners", "shadow.txt"))
 	if _, ok := bannerMap["shadow.txt"]; !ok {
 		t.Error("Failed to load banner file")
 	}
-	loadBanner("thinkertoy.txt")
+	loadBanner(filepath.Join("banners", "thinkertoy.txt"))
 	if _, ok := bannerMap["thinkertoy.txt"]; !ok {
 		t.Error("Failed to load banner file")
 	}
-	loadBanner("standard.txt")
+	loadBanner(filepath.Join("banners", "standard.txt"))
 	if _, ok := bannerMap["standard.txt"]; !ok {
 		t.Error("Failed to load the banner file")
 	}
@@ -54,3 +55,20 @@ func TestPrintAscii(t *testing.T) {
 
 // 	return true
 // }
+
+func Test_loadBanner(t *testing.T) {
+	type args struct {
+		filename string
+	}
+	tests := []struct {
+		name string
+		args args
+	}{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			loadBanner(tt.args.filename)
+		})
+	}
+}
