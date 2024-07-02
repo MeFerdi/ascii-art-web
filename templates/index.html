@@ -91,10 +91,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById("text").addEventListener('input', updateArt);
-            document.querySelectorAll('input[name="banner"]').forEach((radio) => {
-                radio.addEventListener('change', updateArt);
-            });
+            document.getElementById("submit-btn").addEventListener('click', updateArt);
         });
     </script>
 </head>
@@ -114,6 +111,7 @@
                 <input type="radio" id="thinkertoy" name="banner" value="thinkertoy">
                 <label for="thinkertoy">Thinkertoy</label>
             </div>
+            <button id="submit-btn">Generate ASCII Art</button>
             <div class="result-box">
                 <pre id="ascii-art-result"></pre>
             </div>
