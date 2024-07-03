@@ -1,10 +1,10 @@
 
-/* body {
+body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-} */
+    /* margin: 0;
+    padding: 0; */
+}
 
 .head {
    margin: 0 auto;
@@ -20,7 +20,7 @@
     
 }
 .bigtable{
-    width: 70%;
+    width: 60%;
     margin: auto;
 }
 
@@ -37,4 +37,31 @@ th, td {
     border: 1px solid black;
     padding: 8px;
     text-align: left;
+}
+
+.resizable-textarea {
+    width: 100%; /* Initial width */
+    min-height: 150px; /* Minimum height */
+    max-width: 100%; /* Maximum width */
+    resize: both; /* Allow resizing both horizontally and vertically */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Include padding and border in width/height */
+    overflow: auto; /* Show scrollbar when content overflows */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .resizable-textarea {
+        width: 90%; /* Adjust width for smaller screens */
+    }
+}
+
+/* Media query for very small screens */
+@media (max-width: 480px) {
+    .resizable-textarea {
+        width: 100%; /* Full width on very small screens */
+    }
 }
