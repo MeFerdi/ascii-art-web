@@ -65,3 +65,16 @@ th, td {
         width: 100%; /* Full width on very small screens */
     }
 }
+
+/* button{
+    background-color: green;
+    color: #f0f0f0;
+} */
+
+pre {
+    padding: 10px; 
+    white-space: pre-wrap; 
+    overflow-x: auto; /* Allows horizontal scrolling if content overflows */
+    border: 1px solid #ccc; /* Optional: Add border for visual distinction */
+    border-radius: 5px; /* Optional: Rounded corners for aesthetics */
+}
