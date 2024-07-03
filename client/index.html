@@ -3,38 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World with CSS</title>
+    <title>ASCII ART</title>
     <link rel="stylesheet" href="/client/styles.css">
 </head>
 <body>
     <div>
-        <table class="table center-table">
-            <th>ASCII ART</th>
-            <tr>
-                <td>
-                    <form>
-                        <input type="radio" id="standard" value="standard">
-                        <label for="standard">Standard</label>
-                        <input type="radio" id="shadow" value="shadow">
-                        <label for="shadow">Shadow</label>
-                        <input type="radio" id="thinkertoy" value="thinkertoy">
-                        <label for="thinkertoy">Thinkertoy</label>
-                    </form>
-                    <button>Generate</button>
-                </td>
-                <td>
-                    <form>
-                        <textarea>Type Here ...</textarea>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form>
-                        <textarea></textarea>
-                    </form>
-                </td>
-            </tr>
+        <table id="layoutGrid">
+            <tbody class="layoutGridStyle">
+                <tr>
+                    <td>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div>ASCII ART</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </td>
+                </tr>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <form>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    
+                                                        <input type="radio" id="standard" value="standard" name="banner">
+                                                        <label for="standard">Standard</label>
+                                                    
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    
+                                                        <input type="radio" id="standard" value="standard" name="banner">
+                                                        <label for="standard">Standard</label>
+                                                   
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                   
+                                                        <input type="radio" id="standard" value="standard" name="banner">
+                                                        <label for="standard">Standard</label>
+                                                    
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <table>
+                                </form>
+                                <tr>
+                                    <td>
+                                        <button>Generate</button>
+                                    </td>
+                                </tr>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                 <form>
+                                    <textarea>Type Here ...</textarea>
+                                </form>
+                                           
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <pre></pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </tbody>
+
         </table>
     </div>
 </body>
