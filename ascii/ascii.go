@@ -64,28 +64,27 @@ func GetLetterArray(char rune, bannerStyle string) []string {
 func PrintAscii(str, bannerStyle string) (string, error) {
 	replaceNewLine := strings.ReplaceAll(str, "\r\n", "\n")
 	lines := strings.Split(replaceNewLine, "\n")
-	letters := [][]string{}
+	var asciiArt strings.Builder
 	for _, line := range lines {
+		line = strings.TrimSpace(line)
+		if line == "" {
+			asciiArt.WriteString("\n")
+			continue
+		}
+		letterArrays := [][]string{}
 		for _, letter := range line {
 			if letter < 32 || letter > 126 {
 				return "", fmt.Errorf("non-ASCII character '%c' encountered", letter)
 			}
 			arr := GetLetterArray(letter, bannerStyle)
-			letters = append(letters, arr)
+			letterArrays = append(letterArrays, arr)
 		}
-	}
-	var result strings.Builder
-	// Print the ASCII art vertically
-	for i := 1; i < 9; i++ {
-		for _, letter := range letters {
-			if len(letter) < i {
-				return "", fmt.Errorf("error: file content modified")
+		for i := 0; i < 8; i++ {
+			for _, letter := range letterArrays {
+				asciiArt.WriteString(letter[i])
 			}
-			result.WriteString(letter[i])
-		}
-		if i < 8 {
-			result.WriteString("\n")
+			asciiArt.WriteString("\n")
 		}
 	}
-	return result.String(), nil
+	return asciiArt.String(), nil
 }

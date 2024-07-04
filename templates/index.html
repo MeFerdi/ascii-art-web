@@ -90,7 +90,7 @@
             </div>
             <button id="submit-btn" onclick="generateArt()">Generate ASCII Art</button>
             <div class="result-box">
-                <pre id="ascii-art-result">{{.Art}}</pre>
+                <pre id="ascii-art-result"></pre>
             </div>
         </div>
     </div>
@@ -98,7 +98,6 @@
         function generateArt() {
             const text = document.getElementById('text').value;
             const banner = document.querySelector('input[name="banner"]:checked').value;
-
             fetch('/ascii-art-live', {
                 method: 'POST',
                 headers: {
@@ -108,7 +107,7 @@
             })
             .then(response => response.text())
             .then(data => {
-                document.getElementById('ascii-art-result').innerText = data.replace(/\n/g, '\r');
+                document.getElementById('ascii-art-result').innerHTML = data.replace(/\n/g, '\r\n');
             })
             .catch(error => {
                 console.error('Error:', error);
