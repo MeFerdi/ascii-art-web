@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ASCII Art Web</title>
+    <title>ASCII-Art-Web</title>
     <style>
         body {
             margin: 0;
@@ -68,32 +68,9 @@
             width: 80%;
             height: 80%;
             overflow: auto;
-            white-space: pre-wrap;
+            white-space: pre-line;
         }
     </style>
-    <script>
-        function updateArt() {
-            const text = document.getElementById("text").value;
-            const banner = document.querySelector('input[name="banner"]:checked').value;
-
-            fetch('/ascii-art-live', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `text=${encodeURIComponent(text)}&banner=${encodeURIComponent(banner)}`,
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("ascii-art-result").innerText = data;
-            })
-            .catch(error => console.error('Error:', error));
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById("submit-btn").addEventListener('click', updateArt);
-        });
-    </script>
 </head>
 <body>
     <div class="container">
@@ -111,11 +88,32 @@
                 <input type="radio" id="thinkertoy" name="banner" value="thinkertoy">
                 <label for="thinkertoy">Thinkertoy</label>
             </div>
-            <button id="submit-btn">Generate ASCII Art</button>
+            <button id="submit-btn" onclick="generateArt()">Generate ASCII Art</button>
             <div class="result-box">
-                <pre id="ascii-art-result"></pre>
+                <pre id="ascii-art-result">{{.Art}}</pre>
             </div>
         </div>
     </div>
+    <script>
+        function generateArt() {
+            const text = document.getElementById('text').value;
+            const banner = document.querySelector('input[name="banner"]:checked').value;
+
+            fetch('/ascii-art-live', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `text=${encodeURIComponent(text)}&banner=${encodeURIComponent(banner)}`,
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('ascii-art-result').innerText = data.replace(/\n/g, '\r');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>

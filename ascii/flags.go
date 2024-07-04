@@ -18,9 +18,6 @@ func SpecialCharacters(str string) (string, bool) {
 	if strings.Contains(str, "\\f") {
 		return "Error: Form feed character", true
 	}
-	if strings.Contains(str, "\\r") {
-		return "Error: Carriage return character", true
-	}
 
 	// Handle tab characters
 	str = strings.ReplaceAll(str, "\\t", "    ")

@@ -21,20 +21,23 @@ func main() {
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
+		w.WriteHeader(http.StatusNotFound)
+		http.ServeFile(w, r, "404.html")
 		return
 	}
 
 	err := templates.ExecuteTemplate(w, "index.html", nil)
 	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		w.WriteHeader(http.StatusInternalServerError)
+		http.ServeFile(w, r, "500.html")
 		return
 	}
 }
 
 func asciiArtHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		http.ServeFile(w, r, "405.html")
 		return
 	}
 
@@ -42,13 +45,15 @@ func asciiArtHandler(w http.ResponseWriter, r *http.Request) {
 	bannerStyle := r.FormValue("banner")
 
 	if str == "" || bannerStyle == "" {
-		http.Error(w, "Bad Request", http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
+		http.ServeFile(w, r, "400.html")
 		return
 	}
 
 	art, err := web.PrintAscii(str, bannerStyle)
 	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		w.WriteHeader(http.StatusInternalServerError)
+		http.ServeFile(w, r, "500.html")
 		return
 	}
 
@@ -60,14 +65,16 @@ func asciiArtHandler(w http.ResponseWriter, r *http.Request) {
 
 	err = templates.ExecuteTemplate(w, "index.html", data)
 	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		w.WriteHeader(http.StatusInternalServerError)
+		http.ServeFile(w, r, "500.html")
 		return
 	}
 }
 
 func asciiArtLiveHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		http.ServeFile(w, r, "405.html")
 		return
 	}
 
@@ -75,13 +82,15 @@ func asciiArtLiveHandler(w http.ResponseWriter, r *http.Request) {
 	bannerStyle := r.FormValue("banner")
 
 	if str == "" || bannerStyle == "" {
-		http.Error(w, "Bad Request", http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
+		http.ServeFile(w, r, "400.html")
 		return
 	}
 
 	art, err := web.PrintAscii(str, bannerStyle)
 	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		w.WriteHeader(http.StatusInternalServerError)
+		http.ServeFile(w, r, "500.html")
 		return
 	}
 

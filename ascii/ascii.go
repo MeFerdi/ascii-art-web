@@ -62,7 +62,8 @@ func GetLetterArray(char rune, bannerStyle string) []string {
 
 // PrintAscii returns the ASCII art representation of a given string
 func PrintAscii(str, bannerStyle string) (string, error) {
-	lines := strings.Split(str, "\n")
+	replaceNewLine := strings.ReplaceAll(str, "\r\n", "\n")
+	lines := strings.Split(replaceNewLine, "\n")
 	letters := [][]string{}
 	for _, line := range lines {
 		for _, letter := range line {
