@@ -8,12 +8,12 @@ import (
 
 func main() {
     // Serve static files (HTML, CSS)
-    fs := http.FileServer(http.Dir("client"))
-    http.Handle("/client/", http.StripPrefix("/client/", fs))
+    fs := http.FileServer(http.Dir("templates"))
+    http.Handle("/templates/", http.StripPrefix("/templates/", fs))
 
     // Define a handler function for handling HTTP requests
     handler := func(w http.ResponseWriter, r *http.Request) {
-        http.ServeFile(w, r, "client/index.html")
+        http.ServeFile(w, r, "templates/index.html")
     }
 
     // Register the handler function for the root route ("/")
