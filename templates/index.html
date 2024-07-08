@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASCII ART</title>
+    <!-- <link rel="stylesheet" href="/templates/styles.css">
+    <script src="/templates/script.js"></script> -->
     <link rel="stylesheet" href="/templates/styles.css">
     <script src="/templates/script.js"></script>
-    
 </head>
 <body>
     <div>
@@ -35,7 +36,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                        <input type="radio" id="standard" value="standard" name="banner">
+                                                        <input type="radio" id="standard" value="standard" name="banner" checked>
                                                         <label for="standard">Standard</label>
                                                     
                                                 </td>
@@ -60,7 +61,7 @@
                                 </form>
                                 <tr>
                                     <td>
-                                        <button onclick="greet()">Generate</button>
+                                        <button onclick="generateArt()">Generate</button>
                                     </td>
                                 </tr>
                                     <tbody>
@@ -69,7 +70,7 @@
                             </td>
                             <td>
                                  <form>
-                                    <textarea class="resizable-textarea">Type Here ...</textarea>
+                                    <textarea class="resizable-textarea" id="printText" placeholder="Type Here ..."></textarea>
                                 </form>
                                            
                             </td>
@@ -81,7 +82,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <pre></pre>
+                                <pre id="ascii-art-result"></pre>
                             </td>
                         </tr>
                     </tbody>
