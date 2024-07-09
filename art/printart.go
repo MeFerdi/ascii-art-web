@@ -1,20 +1,20 @@
 package art
 
 import (
-	"fmt"
 	"strings"
 )
 
-func PrintArt(slicedFile []string, strArg string) {
+func PrintArt(slicedFile []string, strArg string) string {
+	var result strings.Builder
 
 	if strArg == "\\n" {
-		fmt.Println()
-		return
+		result.WriteString("\n")
+		return result.String()
 	} else if strArg == "" {
-		return
+		return ""
 	} else if strArg == "\\t" {
-		fmt.Println("	")
-		return
+		result.WriteString("    ")
+		return result.String()
 	}
 
 	// Handle unprintables
@@ -22,13 +22,14 @@ func PrintArt(slicedFile []string, strArg string) {
 
 	for _, unpri := range notHandle {
 		if strings.Contains(strArg, unpri) {
-			fmt.Println("Contains unprintable")
-			return
+			return "Contains unprintable"
 		}
 	}
+
 	// Handle tab
 	args := strings.Replace(strArg, "\\t", "    ", -1)
 	argsN := strings.ReplaceAll(args, "\\n", "\n")
+
 	// Handle newline
 	argsSplit := strings.Split(argsN, "\n")
 
@@ -36,15 +37,14 @@ func PrintArt(slicedFile []string, strArg string) {
 	for _, v := range argsSplit {
 		for _, val := range v {
 			if val < 32 || val > 126 {
-				fmt.Println("Unprintable Strings")
-				return
+				return "Unprintable Strings"
 			}
 		}
 	}
 
 	for _, i := range argsSplit {
 		if i == "" {
-			fmt.Println()
+			result.WriteString("\n")
 			continue
 		}
 		// Loop through the eight lines
@@ -52,9 +52,11 @@ func PrintArt(slicedFile []string, strArg string) {
 			// Loop through fileData
 			for _, k := range i {
 				start := int(k-32)*9 + 1
-				fmt.Printf(slicedFile[start+j])
+				result.WriteString(slicedFile[start+j])
 			}
-			fmt.Println()
+			result.WriteString("\n")
 		}
 	}
+
+	return result.String()
 }
