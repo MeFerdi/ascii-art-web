@@ -13,6 +13,12 @@ import (
 var templates = template.Must(template.ParseFiles(filepath.Join("templates", "index.html")))
 
 func main() {
+	// Create a file server for the "templates" directory
+	fs := http.FileServer(http.Dir("templates"))
+
+	// Handle requests starting with "/templates/" by stripping the prefix
+	// and serving files from "templates" directory
+	http.Handle("/templates/", http.StripPrefix("/templates/", fs))
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/ascii", asciiArtHandler)
 	fmt.Println("Starting server on :8080...")
