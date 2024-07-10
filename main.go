@@ -18,6 +18,8 @@ func main() {
 
 	// Register the handler function for the root route ("/")
 	http.HandleFunc("/", handlers.HandlerHome)
+	http.HandleFunc("/ascii",handlers.AsciiArtHandler)
+	http.HandleFunc("/ascii-art-live",handlers.AsciiArtLiveHandler)
 
 	port := ":8080"
 
