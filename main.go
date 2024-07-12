@@ -12,7 +12,7 @@ import (
 var templates = template.Must(template.ParseFiles(filepath.Join("templates", "index.html")))
 
 func main() {
-	fmt.Println("Starting server on :8080 at http://localhost:8080")
+	fmt.Println("Starting server at http://localhost:8080")
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/ascii", asciiArtHandler)
 	http.HandleFunc("/ascii-art-live", asciiArtLiveHandler)
