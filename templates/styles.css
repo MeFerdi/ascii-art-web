@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+.head {
+   margin: 0 auto;
+   text-align: center;
+}
+.layoutGridStyle{
+    padding: 0px;
+    border-width: 0px;
+    vertical-align: top;
+    
+    
+}
+.bigtable{
+    width: 60%;
+    margin: auto;
+}
+#layoutGrid {
+    margin:0 auto;
+    
+}
+table {
+    width: 100%;
+            border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+.resizable-textarea {
+    width: 100%; 
+    min-height: 150px;
+    max-width: 100%;
+    resize: both; 
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; 
+    overflow: auto; 
+}
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .resizable-textarea {
+        width: 90%;
+    }
+}
+/* Media query for very small screens */
+@media (max-width: 480px) {
+    .resizable-textarea {
+        width: 100%; 
+    }
+}
+
+pre {
+    padding: 1em; 
+    white-space: pre-wrap; 
+    overflow-x: auto; /* Allows horizontal scrolling if content overflows */
+    border: 1px solid #ccc; /* Optional: Add border for visual distinction */
+    border-radius: 5px; /* Optional: Rounded corners for aesthetics */
+}
