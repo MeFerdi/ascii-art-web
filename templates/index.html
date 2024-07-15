@@ -3,9 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ascii Art Web</title>
+    <title>ASCII ART WEB</title>
+    <link rel="stylesheet" href="/templates/styles.css">
+    <script src="templates/script.js"></script>
 </head>
 <body>
-    <h1>Hello</h1>
+    <div class="bigtable">
+        <table id="layoutGrid">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        <div class="head">ASCII ART WEB</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="layoutGridStyle">
+                <tr>
+                    <td>
+                        <fieldset>
+                            <legend>Banner Styles</legend>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" id="standard" value="standard" name="banner" checked>
+                                            <label for="standard">Standard</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" id="shadow" value="shadow" name="banner">
+                                            <label for="shadow">Shadow</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" id="thinkertoy" value="thinkertoy" name="banner">
+                                            <label for="thinkertoy">Thinkertoy</label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                        <button id="submit-btn" onclick="generateArt()">Generate</button>
+                    </td>
+                    <td>
+                        <textarea class="resizable-textarea" id="text" placeholder="Type Here ..." name="text"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <pre id="ascii-art-result"></pre>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
