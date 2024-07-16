@@ -25,8 +25,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// http.ServeFile(w, r, "templates/index.html")
-
 func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -36,12 +34,6 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 
 	str := r.FormValue("text")
 	bannerStyle := r.FormValue("banner")
-
-	// if str == "" || bannerStyle == "" {
-	// 	w.WriteHeader(http.StatusBadRequest)
-	// 	http.ServeFile(w, r, "400.html")
-	// 	return
-	// }
 
 	art, err := web.PrintAscii(str, bannerStyle)
 	if err != nil {
@@ -73,12 +65,6 @@ func AsciiArtLiveHandler(w http.ResponseWriter, r *http.Request) {
 
 	str := r.FormValue("text")
 	bannerStyle := r.FormValue("banner")
-
-	// if str == "" || bannerStyle == "" {
-	// 	w.WriteHeader(http.StatusBadRequest)
-	// 	http.ServeFile(w, r, "400.html")
-	// 	return
-	// }
 
 	art, err := web.PrintAscii(str, bannerStyle)
 	if err != nil {
