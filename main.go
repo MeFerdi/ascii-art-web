@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	web "web/handler"
@@ -16,5 +17,6 @@ func main() {
 	http.HandleFunc("/ascii-art-live", web.AsciiArtLiveHandler)
 
 	port := ":8080"
+	fmt.Printf("Starting Server at port %v  \n", port)
 	http.ListenAndServe(port, nil)
 }
