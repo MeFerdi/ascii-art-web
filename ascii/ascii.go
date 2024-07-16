@@ -79,7 +79,7 @@ func PrintAscii(str, bannerStyle string) (string, error) {
 			arr := GetLetterArray(letter, bannerStyle)
 			letterArrays = append(letterArrays, arr)
 		}
-		for i := 1; i < 9; i++ {
+		for i := 0; i < 9; i++ {
 			for _, letter := range letterArrays {
 				asciiArt.WriteString(letter[i])
 			}
