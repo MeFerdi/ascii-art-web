@@ -57,11 +57,11 @@ th, td {
 pre {
     padding: 1em;
     white-space: pre-wrap;
-    overflow-x: auto; /* Allows horizontal scrolling if content overflows */
-    overflow-y: auto; /* Hide vertical scrollbar */
-    border: 1px solid #ccc; /* Optional: Add border for visual distinction */
-    border-radius: 5px; /* Optional: Rounded corners for aesthetics */
-    max-height: 300px; /* Example: Limit height to 300px before scrolling */
+    overflow-x:scroll; 
+    overflow-y: auto;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    max-height: 400px;
 }
 
 
