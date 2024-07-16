@@ -20,41 +20,43 @@
                 <tr>
                     <td>
                         <fieldset>
-                            <legend>Banner Styles</legend>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="radio" id="standard" value="standard" name="banner" checked>
-                                            <label for="standard">Standard</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="radio" id="shadow" value="shadow" name="banner">
-                                            <label for="shadow">Shadow</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="radio" id="thinkertoy" value="thinkertoy" name="banner">
-                                            <label for="thinkertoy">Thinkertoy</label>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </fieldset>
-                        <button id="submit-btn">Generate</button>
-                    </td>
-                    <td>
-                        <textarea class="resizable-textarea" id="text" placeholder="Type Here ..." name="text"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <pre id="ascii-art-result">{{ .Art }}</pre>
-                    </td>
-                </tr>
+                            <form action="/ascii" method="post">
+                                <legend>Banner Styles</legend>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="radio" id="standard" value="standard" name="banner" checked>
+                                                <label for="standard">Standard</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="radio" id="shadow" value="shadow" name="banner">
+                                                <label for="shadow">Shadow</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="radio" id="thinkertoy" value="thinkertoy" name="banner">
+                                                <label for="thinkertoy">Thinkertoy</label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                            <button type="submit" id="submit-btn">Generate</button>
+                        </td>
+                        <td>
+                            <textarea class="resizable-textarea" id="text" placeholder="Type Here ..." name="textData"></textarea>
+                        </td>
+                    </form>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <pre id="ascii-art-result"> {{.Art}}</pre>
+                        </td>
+                    </tr>
             </tbody>
         </table>
     </div>

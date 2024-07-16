@@ -32,7 +32,7 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	str := r.FormValue("text")
+	str := r.FormValue("textData")
 	bannerStyle := r.FormValue("banner")
 
 	art, err := web.PrintAscii(str, bannerStyle)
