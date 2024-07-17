@@ -1,6 +1,7 @@
 package web
 
 import (
+	"log"
 	"net/http"
 	"path/filepath"
 	"text/template"
@@ -8,33 +9,68 @@ import (
 	web "web/ascii"
 )
 
-var templates = template.Must(template.ParseFiles(filepath.Join("templates", "index.html")))
+var templates *template.Template
+
+func init() {
+	var err error
+	templates, err = template.ParseFiles(filepath.Join("templates", "index.html"))
+	if err != nil {
+		log.Printf("404 Not Found: %v", err)
+		templates = nil // Set templates to nil to indicate the template couldn't be loaded
+	}
+}
+
+func renderTemplate(w http.ResponseWriter, tmpl string, data interface{}) {
+	if templates == nil {
+		http.Error(w, "404 Not Found", http.StatusNotFound)
+		return
+	}
+
+	err := templates.ExecuteTemplate(w, tmpl+".html", data)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		log.Printf("Error executing template %s: %v", tmpl, err)
+	}
+}
 
 func Handler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		w.WriteHeader(http.StatusNotFound)
+		http.Error(w, "404 Not Found", http.StatusNotFound)
+		return
+	}
+
+	if templates == nil {
+		http.Error(w, "404 Not Found", http.StatusNotFound)
+		return
 	}
 
 	err := templates.ExecuteTemplate(w, "index.html", nil)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		log.Printf("Error executing template index.html: %v", err)
 	}
 }
 
 func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		w.WriteHeader(http.StatusMethodNotAllowed)
+		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
+		return
 	}
 
 	str := r.FormValue("textData")
 	bannerStyle := r.FormValue("banner")
 
+	if len(str) == 0 {
+		http.Error(w, "400 Bad Request", http.StatusBadRequest)
+		return
+	}
+
 	art, err := web.PrintAscii(str, bannerStyle)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-	}
-	if len(str) == 0 {
-		w.WriteHeader(http.StatusBadRequest)
+		
+		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+		log.Printf("Error generating ASCII art: %v", err)
+		return
 	}
 
 	data := struct {
@@ -43,15 +79,13 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 		Art: art,
 	}
 
-	err = templates.ExecuteTemplate(w, "index.html", data)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-	}
+	renderTemplate(w, "index", data)
 }
 
 func AsciiArtLiveHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		w.WriteHeader(http.StatusMethodNotAllowed)
+		http.Error(w, "405 Method Not Allowed", http.StatusMethodNotAllowed)
+		return
 	}
 
 	str := r.FormValue("text")
@@ -59,7 +93,10 @@ func AsciiArtLiveHandler(w http.ResponseWriter, r *http.Request) {
 
 	art, err := web.PrintAscii(str, bannerStyle)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		log.Printf("Error generating ASCII art: %v", err)
+		return
 	}
 
 	w.Header().Set("Content-Type", "text/plain")
