@@ -12,21 +12,18 @@ var templates = template.Must(template.ParseFiles(filepath.Join("templates", "in
 
 func Handler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		http.Error(w, "404 Not Found", http.StatusNotFound)
-		return
+		w.WriteHeader(http.StatusNotFound)
 	}
 
 	err := templates.ExecuteTemplate(w, "index.html", nil)
 	if err != nil {
-		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
-		return
+		w.WriteHeader(http.StatusInternalServerError)
 	}
 }
 
 func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		http.Error(w, "405 Method Not Allowed", http.StatusMethodNotAllowed)
-		return
+		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
 
 	str := r.FormValue("textData")
@@ -34,8 +31,10 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 
 	art, err := web.PrintAscii(str, bannerStyle)
 	if err != nil {
-		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
-		return
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+	if len(str) == 0 {
+		w.WriteHeader(http.StatusBadRequest)
 	}
 
 	data := struct {
@@ -46,15 +45,13 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 
 	err = templates.ExecuteTemplate(w, "index.html", data)
 	if err != nil {
-		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
-		return
+		w.WriteHeader(http.StatusInternalServerError)
 	}
 }
 
 func AsciiArtLiveHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		http.Error(w, "405 Method Not Allowed", http.StatusMethodNotAllowed)
-		return
+		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
 
 	str := r.FormValue("text")
@@ -62,8 +59,7 @@ func AsciiArtLiveHandler(w http.ResponseWriter, r *http.Request) {
 
 	art, err := web.PrintAscii(str, bannerStyle)
 	if err != nil {
-		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
-		return
+		w.WriteHeader(http.StatusInternalServerError)
 	}
 
 	w.Header().Set("Content-Type", "text/plain")
