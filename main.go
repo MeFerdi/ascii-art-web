@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	web "web/handler"
@@ -16,7 +17,9 @@ func main() {
 		if r.URL.Path == "/" {
 			web.Handler(w, r)
 		} else {
+			// w.WriteHeader(http.StatusNotFound)
 			w.WriteHeader(http.StatusNotFound)
+			log.Printf("404 error: %s", r.URL.Path)
 		}
 	})
 
@@ -24,7 +27,9 @@ func main() {
 		if r.URL.Path == "/ascii" {
 			web.AsciiArtHandler(w, r)
 		} else {
+			// w.WriteHeader(http.StatusNotFound)
 			w.WriteHeader(http.StatusNotFound)
+			log.Printf("404 error: %s", r.URL.Path)
 		}
 	})
 
@@ -33,6 +38,7 @@ func main() {
 			web.AsciiArtLiveHandler(w, r)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
+			log.Printf("404 error: %s", r.URL.Path)
 		}
 	})
 
