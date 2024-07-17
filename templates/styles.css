@@ -15,7 +15,7 @@ body {
 }
 
 .bigtable {
-    width: 80%; /* Adjusted for responsiveness */
+    width: 60%; /* Adjusted for responsiveness */
     margin: auto;
     overflow: hidden; /* Ensures content doesn't overflow the body */
 }
