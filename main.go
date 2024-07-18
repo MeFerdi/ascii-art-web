@@ -17,7 +17,6 @@ func main() {
 		if r.URL.Path == "/" {
 			web.Handler(w, r)
 		} else {
-			// w.WriteHeader(http.StatusNotFound)
 			w.WriteHeader(http.StatusNotFound)
 			log.Printf("404 error: %s", r.URL.Path)
 		}
@@ -26,16 +25,6 @@ func main() {
 	http.HandleFunc("/ascii", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/ascii" {
 			web.AsciiArtHandler(w, r)
-		} else {
-			// w.WriteHeader(http.StatusNotFound)
-			w.WriteHeader(http.StatusNotFound)
-			log.Printf("404 error: %s", r.URL.Path)
-		}
-	})
-
-	http.HandleFunc("/ascii-art-live", func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/ascii-art-live" {
-			web.AsciiArtLiveHandler(w, r)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 			log.Printf("404 error: %s", r.URL.Path)

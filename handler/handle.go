@@ -81,24 +81,3 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 
 	renderTemplate(w, "index", data)
 }
-
-func AsciiArtLiveHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "405 Method Not Allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
-	str := r.FormValue("text")
-	bannerStyle := r.FormValue("banner")
-
-	art, err := web.PrintAscii(str, bannerStyle)
-	if err != nil {
-		
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		log.Printf("Error generating ASCII art: %v", err)
-		return
-	}
-
-	w.Header().Set("Content-Type", "text/plain")
-	w.Write([]byte(art))
-}
