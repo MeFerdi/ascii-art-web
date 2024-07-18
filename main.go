@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 	"log"
+	"net/http"
 
-	web "web/handler"
+	"ascii-art-web/handler"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/" {
-			web.Handler(w, r)
+			handler.Handler(w, r)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 			log.Printf("404 error: %s", r.URL.Path)
@@ -24,7 +24,7 @@ func main() {
 
 	http.HandleFunc("/ascii", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/ascii" {
-			web.AsciiArtHandler(w, r)
+			handler.AsciiArtHandler(w, r)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 			log.Printf("404 error: %s", r.URL.Path)

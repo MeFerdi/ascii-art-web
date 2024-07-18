@@ -1,4 +1,4 @@
-package web
+package handler
 
 import (
 	"log"
@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"text/template"
 
-	web "web/ascii"
+	"ascii-art-web/asciii"
 )
 
 var templates *template.Template
@@ -65,9 +65,9 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	art, err := web.PrintAscii(str, bannerStyle)
+	art, err := asciii.PrintAscii(str, bannerStyle)
 	if err != nil {
-		
+
 		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
 		log.Printf("Error generating ASCII art: %v", err)
 		return
