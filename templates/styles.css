@@ -2,63 +2,75 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
 }
+
 .head {
-   margin: 0 auto;
-   text-align: center;
+    margin: 0 auto;
+    text-align: center;
 }
-.layoutGridStyle{
+
+.layoutGridStyle {
     padding: 0px;
     border-width: 0px;
     vertical-align: top;
-    
-    
 }
-.bigtable{
-    width: 60%;
+
+.bigtable {
+    width: 60%; /* Adjusted for responsiveness */
     margin: auto;
+    overflow: hidden; /* Ensures content doesn't overflow the body */
 }
+
 #layoutGrid {
-    margin:0 auto;
-    
+    margin: 0 auto;
+    width: 100%;
 }
+
 table {
     width: 100%;
-            border-collapse: collapse;
+    border-collapse: collapse;
 }
+
 th, td {
     border: 1px solid black;
     padding: 8px;
     text-align: left;
 }
+
 .resizable-textarea {
-    width: 100%; 
+    width: 100%;
     min-height: 150px;
     max-width: 100%;
-    resize: both; 
+    resize: both;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; 
-    overflow: auto; 
+    box-sizing: border-box;
+    overflow: auto; /* Ensures textarea has scrollbars when content exceeds height */
 }
+
 /* Media query for smaller screens */
 @media (max-width: 768px) {
+    .bigtable {
+        width: 90%; /* Adjusted width for smaller screens */
+    }
+    
     .resizable-textarea {
         width: 90%;
     }
 }
+
 /* Media query for very small screens */
 @media (max-width: 480px) {
     .resizable-textarea {
-        width: 100%; 
+        width: 100%;
     }
 }
-pre {
-    padding: 1em; 
-    white-space: pre-wrap; 
-    overflow-x: auto; /* Allows horizontal scrolling if content overflows */
-    border: 1px solid #ccc; /* Optional: Add border for visual distinction */
-    border-radius: 5px; /* Optional: Rounded corners for aesthetics */
-}
 
+#ascii-art-result {
+    overflow: auto; /* Ensures pre element has scrollbars when content exceeds height */
+    max-height: 400px; /* Example height limit; adjust as needed */
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    padding: 1em;
+}
